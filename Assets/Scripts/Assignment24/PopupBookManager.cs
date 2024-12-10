@@ -31,29 +31,35 @@ public class PopupBookManager : MonoBehaviour
             if (bookAngle < 180)
             {
                 CameraAnimate(Vector3.right, 0.001f);
+
                 ChangeBedTransforms(targetScale: targetBedScale,
                     targetPostion: targetBedPostion,
                     rotateAngle: Vector3.right,
                     checkIfMoveBed: false);
-                ChangeWolfTransforms(targetScale: targetWolfScale, targetPostion: targetWolfPostion, rotateAngle: Vector3.right);
+
+                ChangeWolfTransforms(targetScale: targetWolfScale,
+                    targetPostion: targetWolfPostion,
+                    rotateAngle: Vector3.right);
             }
         }
 
         if (Input.GetKey(KeyCode.RightArrow))
         {
-            RotateCoverBook(-1);
+            RotateCoverBook(angle: -1);
             if (bookAngle > 0)
             {
                 CameraAnimate(Vector3.left, -0.001f);
+
                 ChangeBedTransforms(targetScale: currentBedScale,
                     targetPostion: currentBedPosition,
                     rotateAngle: Vector3.left,
                     checkIfMoveBed: true);
-                ChangeWolfTransforms(targetScale: currentWolfScale, targetPostion: currentWolfPosition, rotateAngle: Vector3.left);
+
+                ChangeWolfTransforms(targetScale: currentWolfScale,
+                    targetPostion: currentWolfPosition,
+                    rotateAngle: Vector3.left);
             }
         }
-        CheckActiveObjects();
-
         if (Input.GetKey(KeyCode.UpArrow))
         {
             ZoomCamera(Vector3.right, 0.005f);
@@ -62,6 +68,8 @@ public class PopupBookManager : MonoBehaviour
         {
             ZoomCamera(Vector3.left, -0.005f);
         }
+
+        CheckActiveObjects();
     }
 
     private void CurrentGameObjectsTransform()
@@ -127,7 +135,6 @@ public class PopupBookManager : MonoBehaviour
     private void ZoomCamera(Vector3 rotateAngle, float positionAngle)
     {
         Camera.main.transform.Rotate(rotateAngle, Time.deltaTime * 6f, Space.Self);
-
         Camera.main.transform.Translate(Vector3.forward * positionAngle, Space.World);
     }
 
