@@ -53,6 +53,15 @@ public class PopupBookManager : MonoBehaviour
             }
         }
         CheckActiveObjects();
+
+        if (Input.GetKey(KeyCode.UpArrow))
+        {
+            ZoomCamera(Vector3.right, 0.005f);
+        }
+        if (Input.GetKey(KeyCode.DownArrow))
+        {
+            ZoomCamera(Vector3.left, -0.005f);
+        }
     }
 
     private void CurrentGameObjectsTransform()
@@ -113,6 +122,12 @@ public class PopupBookManager : MonoBehaviour
     {
         Camera.main.transform.Rotate(rotateAngle, Time.deltaTime * 10f, Space.Self);
         Camera.main.transform.Translate(Vector3.up * positionAngle, Space.World);
+        Camera.main.transform.Translate(Vector3.forward * positionAngle, Space.World);
+    }
+    private void ZoomCamera(Vector3 rotateAngle, float positionAngle)
+    {
+        Camera.main.transform.Rotate(rotateAngle, Time.deltaTime * 6f, Space.Self);
+
         Camera.main.transform.Translate(Vector3.forward * positionAngle, Space.World);
     }
 
